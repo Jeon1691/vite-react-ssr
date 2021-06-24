@@ -64,7 +64,7 @@ async function handleRender(req, res, { template, dev, vite, dist }) {
       template = await vite.transformIndexHtml(url, template)
       render = (await vite.ssrLoadModule('/src/entry-server.tsx')).render
     } else {
-      render = require(path.resolve(dist, 'server/entry-server.ts')).render
+      render = require(path.resolve(dist, 'server/entry-server.js')).render
     }
 
     const context = {

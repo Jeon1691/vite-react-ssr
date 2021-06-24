@@ -1,4 +1,3 @@
-import request from '../utils/request'
 import './Home.css'
 
 const Home: SSRPage<{ data: any[] }> = (props) => {
@@ -8,16 +7,18 @@ const Home: SSRPage<{ data: any[] }> = (props) => {
   return (
     <>
       <h1>Home</h1>
-      <pre>{props.data}</pre>
+      <ul>
+        {props.data.map((i) => (
+          <li key={i}>{i}</li>
+        ))}
+      </ul>
     </>
   )
 }
 
 Home.loadData = async function (ctx) {
-  const result = await request.get('https://cnodejs.org/api/v1/topics')
-
   return {
-    data: result.data, // props.data
+    data: [1, 2, 3, 4],
   }
 }
 

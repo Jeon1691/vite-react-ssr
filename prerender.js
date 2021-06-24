@@ -7,7 +7,7 @@ const path = require('path')
 const toAbsolute = (p) => path.resolve(__dirname, p)
 
 const template = fs.readFileSync(toAbsolute('dist/static/index.html'), 'utf-8')
-const { render } = require('./dist/server/entry-server.ts')
+const { render } = require('./dist/server/entry-server.js')
 
 // determine routes to pre-render from src/pages
 const routesToPrerender = fs
