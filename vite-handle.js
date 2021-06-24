@@ -99,7 +99,58 @@ async function handleRender(req, res, { template, dev, vite, dist }) {
     dev && vite.ssrFixStacktrace(err)
     console.error(err)
     res.statusCode = 500
-    res.end('Server Error')
+    if (dev) {
+      res.end(
+        `
+        <style>
+        html {
+          font-size: 14px;
+        }
+        main {
+          max-width: 800px;
+          margin: 5rem auto;
+          border: 3px solid red;
+          border-radius: 12px;
+          padding: 12px;
+        }
+        pre {
+          white-space: pre-line;
+        }
+        code {
+          display: block;
+          margin: 6px auto;
+        }
+        </style>
+        <main>
+        <p style="color: red;">Error at file: ${err.id}</p>
+      
+        <div>
+        <p> 
+          Frame at:
+        </p>
+        <pre>
+        ${err.frame
+          .split('\n')
+          .map((line) => `<code>${line}</code>`)
+          .join('')}
+        </pre>
+        </div>
+
+        <div>
+        <p>Output: </p>
+        <pre>
+        ${err.pluginCode
+          .split('\n')
+          .map((line) => `<code>${line}</code>`)
+          .join('')}
+        </pre>
+        </div>
+        </main>
+        `,
+      )
+    } else {
+      res.end('Server Error')
+    }
   }
 }
 
