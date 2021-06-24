@@ -3,4 +3,6 @@ node_modules
 dist
 dist-ssr
 *.local
-package-lock.json
+bundle-analyze
+stats.html
+.env.development
