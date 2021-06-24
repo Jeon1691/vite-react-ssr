@@ -9,7 +9,6 @@ declare global {
   export const React: typeof $React
   export const __DEV__: boolean
   export type KV = Record<string, any>
-
   export type SSRPage<P = unknown> = {
     loadData?: (ctx: {
       isSSR: boolean
@@ -19,7 +18,8 @@ declare global {
       req: IncomingMessage
     }) => Promise<{ redirect?: string } & P>
   } & FC<
-    { data: P } & RouteComponentProps & {
+    P &
+      RouteComponentProps & {
         ssr: KV
         ssrCurrent: boolean
         loaded: boolean
