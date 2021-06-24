@@ -18,12 +18,10 @@ declare global {
       req: IncomingMessage
     }) => Promise<{ redirect?: string } & P>
   } & FC<
-    P &
-      RouteComponentProps & {
-        ssr: KV
-        ssrCurrent: boolean
-        loaded: boolean
-      }
+    RouteComponentProps & {
+      ssr: KV
+      ssrCurrent: boolean
+    } & (({ loaded: true } & P) | { loaded: false })
   >
 }
 

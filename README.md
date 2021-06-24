@@ -62,10 +62,15 @@ const Test: SSRPage = (props) => {
 
 Define component loadData function:
 
-```js
-// pages/demo.jsx
+```tsx
+// pages/demo.tsx
 function Demo(props) {
-  return <>...</>
+  // must type guard first
+  if (!props.loaded) {
+    return <span>Loading..</span>
+  }
+  // if loaded, then can access `data`, either you will get `undefined`
+  return <>{JSON.stringify(props.data.list)}</>
 }
 
 // ssr data load
