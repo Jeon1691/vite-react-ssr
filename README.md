@@ -8,6 +8,7 @@ Support:
 
 - fetch InitialData in `client-server.ts`
 - `client-only` component support with `@loadable/component`
+- SEO, `react-helmet`
 
 ## fetch InitialData
 
