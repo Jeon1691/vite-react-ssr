@@ -1,8 +1,14 @@
-export default function ErrorPage (props) {
+interface ErrorPageProps {
+  status: number
+  message: string
+}
+
+export default function ErrorPage(props: ErrorPageProps) {
   return (
     <div>
-      <h2>Render Error</h2>
-      <pre>{props.message}</pre>
+      <p className="text-center">
+        {props.status} | {props.message}
+      </p>
     </div>
   )
 }

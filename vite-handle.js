@@ -1,7 +1,9 @@
+// @ts-check
 const fs = require('fs')
+const { IncomingMessage } = require('http')
 const path = require('path')
 const isTest = process.env.NODE_ENV === 'test' || !!process.env.VITE_TEST_BUILD
-
+const { Helmet } = require('react-helmet')
 function queryStringToObject(query) {
   const result = query.match(/\?(.*)/)
   if (!result) return {}
@@ -14,6 +16,9 @@ async function createViteHandle({
   index,
   dist,
 }) {
+  /**
+   * @type {import('vite').ViteDevServer}
+   */
   let vite = null
   let staticServe = null
   const indexHTML = fs.readFileSync(index, 'utf-8')
@@ -54,6 +59,14 @@ async function createViteHandle({
   }
 }
 
+/**
+ *
+ * @param {IncomingMessage} req
+ * @param {*} res
+ * @param {{template: any; dev: boolean; vite: import('vite').ViteDevServer;dist: string}} param2
+ * @returns
+ */
+
 async function handleRender(req, res, { template, dev, vite, dist }) {
   try {
     const url = req.url
@@ -84,22 +97,26 @@ async function handleRender(req, res, { template, dev, vite, dist }) {
     }
 
     const ssrDataText = JSON.stringify(propsData).replace(/\//g, '\\/')
-
+    const helmet = Helmet.renderStatic()
     const html = template
       .replace(
         '<!--init-props-->',
         `<script id="ssr-data" type="text/json">${ssrDataText}</script>`,
       )
       .replace(`<!--app-html-->`, appHtml)
+      .replace(
+        `<!--init-header-->`,
+        `${helmet.meta.toString()}${helmet.title.toString()}${helmet.script.toString()}`,
+      )
 
     res.statusCode = 200
     res.setHeader('Content-Type', 'text/html; utf-8')
     res.end(html)
   } catch (err) {
     dev && vite.ssrFixStacktrace(err)
-    console.error(err)
     res.statusCode = 500
     if (dev) {
+      console.error(err)
       res.end(
         `
         <style>
@@ -122,6 +139,7 @@ async function handleRender(req, res, { template, dev, vite, dist }) {
         }
         </style>
         <main>
+        <p>${err.message}</p>
         <p style="color: red;">Error at file: ${err.id}</p>
       
         <div>
@@ -130,7 +148,7 @@ async function handleRender(req, res, { template, dev, vite, dist }) {
         </p>
         <pre>
         ${err.frame
-          .split('\n')
+          ?.split('\n')
           .map((line) => `<code>${line}</code>`)
           .join('')}
         </pre>
@@ -140,7 +158,7 @@ async function handleRender(req, res, { template, dev, vite, dist }) {
         <p>Output: </p>
         <pre>
         ${err.pluginCode
-          .split('\n')
+          ?.split('\n')
           .map((line) => `<code>${line}</code>`)
           .join('')}
         </pre>

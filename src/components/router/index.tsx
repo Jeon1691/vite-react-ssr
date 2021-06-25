@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router'
 import {
   matchRoutes,
   renderRoutes,
@@ -22,7 +23,7 @@ function ssrWrapper(
       ssrCurrent: props.ssr.hasOwnProperty(props.match.path) && ssr.url === url,
     }
     data.loaded = data.ssrCurrent
-
+    const firstRender = useRef(data.ssrCurrent)
     const [injectData, setInjectData] = useState(data)
 
     const frontendLoadData = () => {
@@ -42,7 +43,7 @@ function ssrWrapper(
               props.history.push(result.redirect)
             }
           } else {
-            const newData = { ...injectData, ...result }
+            const newData = { ...result }
             newData.loaded = true
 
             // 避免 unmounted 还设置
@@ -56,12 +57,18 @@ function ssrWrapper(
         })
     }
 
+    const { pathname } = useLocation()
     useEffect(() => {
       // 切换路由，如果服务端渲染的不是当前路由时渲染
       if (!data.ssrCurrent && Component.loadData) {
         frontendLoadData()
+        firstRender.current = false
+      } else if (!firstRender.current && Component.loadData) {
+        frontendLoadData()
       }
+    }, [pathname])
 
+    useEffect(() => {
       return () => {
         exit.current = true
       }
@@ -86,10 +93,22 @@ function ssrWrapper(
   return SSRPage
 }
 
+export interface IRouteConfig {
+  key?: React.Key
+  location?: Location
+  component?: React.ReactElement | SSRPage<any>
+  routes?: IRouteConfig[]
+  path?: string | string[]
+  exact?: boolean
+  strict?: boolean
+  render?: (props: RouteConfigComponentProps<any>) => React.ReactNode
+  label?: string
+}
+
 export default class Router {
-  private routes: RouteConfig[]
-  constructor({ routes }: RouteConfig) {
-    function loop(arr: NonNullable<RouteConfig['routes']>) {
+  private routes: IRouteConfig[]
+  constructor({ routes }: IRouteConfig) {
+    function loop(arr: IRouteConfig[]) {
       return arr.map((e) => {
         const route = {
           ...e,
@@ -112,8 +131,8 @@ export default class Router {
               />
             )
           }
-          // @ts-expect-error
-          route.component.loadData = e.component.loadData
+
+          route.component.loadData = (e.component as SSRPage).loadData
           route.exact = false
           route.routes = loop(e.routes)
         } else {
@@ -128,10 +147,10 @@ export default class Router {
   }
 
   view(props: any) {
-    return renderRoutes(this.routes, props)
+    return renderRoutes(this.routes as RouteConfig[], props)
   }
 
   match(url: string) {
-    return matchRoutes(this.routes, url)
+    return matchRoutes(this.routes as RouteConfig[], url)
   }
 }

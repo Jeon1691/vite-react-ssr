@@ -8,9 +8,9 @@ export function App() {
   return (
     <>
       <SSRConsumer>
-        {(ctx: any) => {
+        {(ctx) => {
           if (ctx.$ssrErrorMsg) {
-            return <ErrorPage message={ctx.$ssrErrorMsg} />
+            return <ErrorPage message={ctx.$ssrErrorMsg} status={ctx.status!} />
           }
 
           return (
