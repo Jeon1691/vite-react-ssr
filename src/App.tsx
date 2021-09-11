@@ -1,9 +1,9 @@
+import { Seo } from 'components/SEO'
 import { Link } from 'react-router-dom'
-import router from './router'
+import './App.css'
 import { SSRConsumer } from './context'
 import ErrorPage from './pages/Error'
-import './App.css'
-import { Seo } from 'components/SEO'
+import router from './router'
 
 export function App() {
   return (
@@ -27,6 +27,9 @@ export function App() {
                 <ul>
                   <li>
                     <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/about">About</Link>
                   </li>
                 </ul>
               </nav>
