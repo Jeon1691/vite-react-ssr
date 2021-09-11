@@ -163,3 +163,7 @@ npm run build
 ```sh
 cross-env NODE_ENV=production node server
 ```
+
+# Shot
+
+![Z9fSfV4](https://i.imgur.com/Z9fSfV4.png)
