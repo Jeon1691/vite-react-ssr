@@ -3,7 +3,7 @@ const path = require('path')
 const createViteHandle = require('./vite-handle')
 
 const isProd = process.env.NODE_ENV === 'production'
-const port = +process.env.PORT || 3000
+const port = +process.env.PORT || 9010
 const resolve = (p) => path.resolve(__dirname, p)
 
 createViteHandle({

@@ -1,4 +1,4 @@
-import { useInitialData } from 'hooks/use-initial-data'
+import { useInitialData } from '@/hooks/use-initial-data'
 import { merge } from 'lodash'
 import { FC } from 'react'
 import { Helmet } from 'react-helmet'

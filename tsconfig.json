@@ -9,7 +9,6 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
-    "baseUrl": "./src",
     "skipLibCheck": true,
     "noEmit": true,
     "skipDefaultLibCheck": true,
@@ -17,19 +16,20 @@
       "esnext",
       "dom"
     ],
+    "baseUrl": ".",
     "paths": {
-      "~": [
+      "@": [
         "./src"
       ],
-      "~/*": [
-        "./src/*"
+      "@/*": [
+        "./src/*",
       ]
     }
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
-    "src/**/*.tsx",
+    "src/**/*.tsx"
   ],
   "exclude": [
     "node_modules",

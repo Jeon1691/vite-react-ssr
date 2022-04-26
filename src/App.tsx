@@ -1,9 +1,9 @@
-import { Seo } from 'components/SEO'
+import { Seo } from '@/components/SEO'
 import { Link } from 'react-router-dom'
-import './App.css'
-import { SSRConsumer } from './context'
-import ErrorPage from './pages/Error'
-import router from './router'
+import '@/App.css'
+import { SSRConsumer } from '@/context'
+import ErrorPage from '@/pages/Error'
+import router from '@/router'
 
 export function App() {
   return (
@@ -17,11 +17,11 @@ export function App() {
           return (
             <>
               <Seo
-                title="Vite React SSR"
-                description={'React SSR base on Vite'}
-              ></Seo>
+                title="Wemade Vite Template"
+                description="React SSR base on Vite"
+              />
               <h1 className="text-center text-4xl my-[40px]">
-                React SSR base on Vite
+                  Wemade Vite Template
               </h1>
               <nav className="main-nav text-center">
                 <ul>

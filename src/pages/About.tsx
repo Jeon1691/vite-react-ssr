@@ -1,5 +1,5 @@
-import { useInitialData } from 'hooks/use-initial-data'
-import './Home.css'
+import { useInitialData } from '@/hooks/use-initial-data'
+import '@/pages/Home.css'
 
 const About: SSRPage<{ data: { text: string } }> = (props) => {
   if (!props.loaded) {

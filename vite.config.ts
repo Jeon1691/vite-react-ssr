@@ -15,6 +15,9 @@ export default ({ mode }) => {
     esbuild: {
       jsxInject: `import React from 'react';`,
     },
+    resolve: {
+      alias: [{ find: '@', replacement: '/src' }],
+    },
     define: {
       __DEV__: process.env.NODE_ENV !== 'production',
     },

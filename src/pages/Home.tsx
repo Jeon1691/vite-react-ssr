@@ -1,5 +1,5 @@
-import { useInitialData } from 'hooks/use-initial-data'
-import './Home.css'
+import { useInitialData } from '@/hooks/use-initial-data'
+import '@/pages/Home.css'
 
 const Home: SSRPage<{ data: any[] }> = (props) => {
   if (!props.loaded) {
@@ -8,7 +8,7 @@ const Home: SSRPage<{ data: any[] }> = (props) => {
   const { data } = useInitialData()
   return (
     <>
-      <h1>Home</h1>
+      <h1>Wemade Vite Template</h1>
       <p>initialData: {data.username}</p>
       <ul>
         {props.data.map((i) => (

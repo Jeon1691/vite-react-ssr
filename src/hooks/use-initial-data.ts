@@ -1,4 +1,4 @@
-import { SSRContext } from 'context'
+import { SSRContext } from '@/context'
 import { useContext } from 'react'
 
 export const useInitialData = () => {

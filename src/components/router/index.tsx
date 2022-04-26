@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, ComponentType } from 'react'
 import { useLocation } from 'react-router'
 import {
   matchRoutes,
@@ -6,10 +6,10 @@ import {
   RouteConfig,
   RouteConfigComponentProps,
 } from 'react-router-config'
-import { queryStringToObject } from '../../utils'
+import { queryStringToObject } from '@/utils'
 
 function ssrWrapper(
-  Component: React.ComponentType<RouteConfigComponentProps<{}>> & {
+  Component: ComponentType<RouteConfigComponentProps> & {
     loadData?: any
   },
 ) {

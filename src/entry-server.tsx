@@ -1,8 +1,8 @@
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
-import { App } from './App'
-import router from './router'
-import { SSRProvider } from './context'
+import { App } from '@/App'
+import router from '@/router'
+import { SSRProvider } from '@/context'
 
 import axios from 'axios'
 import { IncomingMessage } from 'http'
