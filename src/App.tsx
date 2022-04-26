@@ -20,9 +20,7 @@ export function App() {
                 title="Wemade Template"
                 description="React SSR base on Vite"
               />
-              <h1 className="text-center text-4xl my-[40px]">
-                Wemade Template
-              </h1>
+              <img src="https://file.wemade.com/homepage/img/sns/wemade.png" className="m-auto" />
               <nav className="main-nav text-center">
                 <ul>
                   <li>
