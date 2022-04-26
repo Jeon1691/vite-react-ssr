@@ -1,6 +1,6 @@
 interface ErrorPageProps {
-  status: number
-  message: string
+  status: number;
+  message: string;
 }
 
 export default function ErrorPage(props: ErrorPageProps) {
@@ -10,5 +10,5 @@ export default function ErrorPage(props: ErrorPageProps) {
         {props.status} | {props.message}
       </p>
     </div>
-  )
+  );
 }

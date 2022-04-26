@@ -1,7 +1,7 @@
-import About from '@/pages/About'
-import Router from '@/components/router'
-import Home from '@/pages/Home'
-import NotFound from '@/pages/NotFound'
+import About from '@/pages/About';
+import Router from '@/components/router';
+import Home from '@/pages/Home';
+import NotFound from '@/pages/NotFound';
 
 export default new Router({
   routes: [
@@ -10,4 +10,4 @@ export default new Router({
 
     { label: '404', component: NotFound },
   ],
-})
+});

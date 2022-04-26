@@ -4,7 +4,6 @@ import { defineConfig, loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import reactRefresh from '@vitejs/plugin-react-refresh'
 
-// https://vitejs.dev/config/
 export default ({ mode }) => {
   process.env = {
     ...process.env,
@@ -16,7 +15,9 @@ export default ({ mode }) => {
       jsxInject: `import React from 'react';`,
     },
     resolve: {
-      alias: [{ find: '@', replacement: '/src' }],
+      alias: [
+        { find: '@', replacement: '/src' },
+      ],
     },
     define: {
       __DEV__: process.env.NODE_ENV !== 'production',

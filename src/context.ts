@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext } from 'react';
 
 export const SSRContext = createContext<{
   // TODO
@@ -8,9 +8,9 @@ export const SSRContext = createContext<{
   status?: number
   error?: true
   message?: string
-}>({} as any)
+}>({} as any);
 
-const { Provider, Consumer } = SSRContext
+const { Provider, Consumer } = SSRContext;
 
-export const SSRProvider = Provider
-export const SSRConsumer = Consumer
+export const SSRProvider = Provider;
+export const SSRConsumer = Consumer;

@@ -1,29 +1,28 @@
-import { useInitialData } from '@/hooks/use-initial-data'
-import { merge } from 'lodash'
-import { FC } from 'react'
-import { Helmet } from 'react-helmet'
+import { FC, DetailedHTMLProps, MetaHTMLAttributes } from 'react';
+import { useInitialData } from '@/hooks/use-initial-data';
+import { merge } from 'lodash';
+import { Helmet } from 'react-helmet';
 
 export interface SeoProps {
-  title: string
-  description?: string
-  template?: boolean
-  image?: string
+  title: string;
+  description?: string;
+  template?: boolean;
+  image?: string;
   meta?:
-    | React.DetailedHTMLProps<
-        React.MetaHTMLAttributes<HTMLMetaElement>,
-        HTMLMetaElement
-      >[]
-    | undefined
+    | DetailedHTMLProps<MetaHTMLAttributes<HTMLMetaElement>,
+    HTMLMetaElement>[]
+    | undefined;
 }
+
 export const Seo: FC<SeoProps> = (props) => {
   const {
     data: { username },
-  } = useInitialData()
-  const { title, description, meta, template = true } = props
+  } = useInitialData();
+  const { title, description, meta, template = true } = props;
 
   return (
     <Helmet
-      htmlAttributes={{ lang: 'zh-cn' }}
+      htmlAttributes={{ lang: 'ko-kr' }}
       title={title}
       titleTemplate={template ? `%s - ${'demo'}` : '%s'}
       meta={merge(
@@ -67,8 +66,8 @@ export const Seo: FC<SeoProps> = (props) => {
         ],
         meta,
       )}
-    ></Helmet>
-  )
-}
+    />
+  );
+};
 
-export { Seo as SEO }
+export { Seo as SEO };

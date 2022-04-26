@@ -1,4 +1,4 @@
-# Vite React SSR
+# Wemade React SSR
 
 Server Side Rendering project template base on `Vite` + `React`.
 
@@ -103,14 +103,14 @@ export default Demo
 
 ```js
 // src/router.jsx
-import Router from './components/router'
-import Home from './pages/Home'
-import User from './pages/User'
-import About from './pages/About'
-import NotFound from './pages/NotFound'
-import Layout from './pages/Layout'
-import Page1 from './pages/Layout/Page-1'
-import Page2 from './pages/Layout/Page-2'
+import Router from '@/components/router';
+import Home from '@/pages/Home';
+import User from '@/pages/User';
+import About from '@/pages/About';
+import NotFound from '@/pages/NotFound';
+import Layout from '@/pages/Layout';
+import Page1 from '@/pages/Layout/Page-1';
+import Page2 from '@/pages/Layout/Page-2';
 
 export default new Router({
   routes: [
@@ -127,7 +127,7 @@ export default new Router({
     { path: '/about', component: About },
     { label: '404', component: NotFound },
   ],
-})
+});
 ```
 
 ## Start
@@ -152,18 +152,14 @@ npm run serve
 
 ## Deploy
 
-1、build
+1. build
 
 ```sh
 npm run build
 ```
 
-2、serve
+2. serve
 
 ```sh
 cross-env NODE_ENV=production node server
 ```
-
-# Shot
-
-![Z9fSfV4](https://i.imgur.com/Z9fSfV4.png)

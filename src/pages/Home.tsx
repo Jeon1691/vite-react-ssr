@@ -1,14 +1,14 @@
-import { useInitialData } from '@/hooks/use-initial-data'
-import '@/pages/Home.css'
+import { useInitialData } from '@/hooks/use-initial-data';
+import '@/pages/Home.css';
 
 const Home: SSRPage<{ data: any[] }> = (props) => {
   if (!props.loaded) {
-    return <span>Loading Data...</span>
+    return <span>Loading Data...</span>;
   }
-  const { data } = useInitialData()
+  const { data } = useInitialData();
   return (
     <>
-      <h1>Wemade Vite Template</h1>
+      <h1>Wemade Template</h1>
       <p>initialData: {data.username}</p>
       <ul>
         {props.data.map((i) => (
@@ -16,13 +16,13 @@ const Home: SSRPage<{ data: any[] }> = (props) => {
         ))}
       </ul>
     </>
-  )
-}
+  );
+};
 
-Home.loadData = async function (ctx) {
+Home.loadData = async function(ctx) {
   return {
     data: [1, 2, 3, 4],
-  }
-}
+  };
+};
 
-export default Home
+export default Home;
